@@ -597,27 +597,6 @@ const CheckOutPage = () => {
                                                             <PaypalCheckoutBtn
                                                                 total={total}
                                                             />
-                                                            <div className="text-sm sm:text-base">
-                                                                <h2 className="font-semibold">
-                                                                    Demo paypal
-                                                                    Acc.
-                                                                </h2>
-                                                                <p>
-                                                                    <span className="font-semibold">
-                                                                        email:{" "}
-                                                                    </span>
-                                                                </p>
-                                                                <p className="whitespace-nowrap">
-                                                                    sb-jphxp27207256@personal.example.com
-                                                                </p>
-                                                                <p>
-                                                                    {" "}
-                                                                    <span className="font-semibold">
-                                                                        password:{" "}
-                                                                    </span>{" "}
-                                                                    demoexample
-                                                                </p>
-                                                            </div>
                                                         </div>
                                                         <div className="w-full sm:w-1/2 flex flex-col items-center">
                                                             <button className="mt-2 bg-blue-500 text-white py-2 px-4 rounded-md font-semibold transition duration-300 cursor-not-allowed">
