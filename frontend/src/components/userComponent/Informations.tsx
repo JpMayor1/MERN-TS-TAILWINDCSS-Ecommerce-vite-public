@@ -1,7 +1,7 @@
 const Informations = () => {
     return (
         <div className="h-[500px] w-full flex justify-center items-center max-[639px]:my-8 sm:my-[100px]">
-            <div className="max-w-[1200px] h-full w-full bg-red-orange py-8 px-4">
+            <div className="max-w-[1200px] h-full w-full bg-red-orange">
                 <div className="relative h-full w-full">
                     <div className="h-full w-full flex text-light max-[639px]:flex-col sm:flex-row p-5 gap-2 items-center justify-center">
                         <img

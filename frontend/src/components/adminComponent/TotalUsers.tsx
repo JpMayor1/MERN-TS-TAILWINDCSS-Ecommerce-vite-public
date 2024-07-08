@@ -21,7 +21,7 @@ const TotalUsers = () => {
                 });
         };
         fetchTotalUsers();
-    }, [totalUsers, API, token]);
+    }, [API, token]);
 
     return (
         <div className="bg-light max-h-[100px] h-full max-w-[250px] w-full py-10 flex gap-2 items-center justify-center rounded-md drop-shadow">

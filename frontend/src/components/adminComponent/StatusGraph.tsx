@@ -14,49 +14,49 @@ const StatusGraph = () => {
     const [totalUsers, setTotalUsers] = useState<number>(0);
 
     useEffect(() => {
+        const fetchTotalOrders = async () => {
+            try {
+                const response = await axios.get(`${API}/api/orders`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setTotalOrders(response.data.length);
+            } catch (error) {
+                console.error("Error fetching total orders:", error);
+            }
+        };
+
+        const fetchTotalProducts = async () => {
+            try {
+                const response = await axios.get(`${API}/api/products`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setTotalProducts(response.data.length);
+            } catch (error) {
+                console.error("Error fetching total products:", error);
+            }
+        };
+
+        const fetchTotalUsers = async () => {
+            try {
+                const response = await axios.get(`${API}/api/users`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setTotalUsers(response.data.length);
+            } catch (error) {
+                console.error("Error fetching total users:", error);
+            }
+        };
+
         fetchTotalOrders();
         fetchTotalProducts();
         fetchTotalUsers();
-    });
-
-    const fetchTotalOrders = async () => {
-        try {
-            const response = await axios.get(`${API}/api/orders`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setTotalOrders(response.data.length);
-        } catch (error) {
-            console.error("Error fetching total orders:", error);
-        }
-    };
-
-    const fetchTotalProducts = async () => {
-        try {
-            const response = await axios.get(`${API}/api/products`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setTotalProducts(response.data.length);
-        } catch (error) {
-            console.error("Error fetching total products:", error);
-        }
-    };
-
-    const fetchTotalUsers = async () => {
-        try {
-            const response = await axios.get(`${API}/api/users`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setTotalUsers(response.data.length);
-        } catch (error) {
-            console.error("Error fetching total users:", error);
-        }
-    };
+    }, [API, token]);
 
     const data = {
         labels: ["Total Orders", "Total Products", "Total Users"],

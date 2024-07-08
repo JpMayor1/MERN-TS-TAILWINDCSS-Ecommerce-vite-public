@@ -5,19 +5,18 @@ import {
     UserCircleIcon,
     PowerIcon,
 } from "@heroicons/react/24/solid";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../stores/useUserStore";
 import { UserState } from "../../utils/types";
-import { useLinkStore } from "../../stores/useLinkStore";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export function Sidebar() {
     const userlogout = useUserStore((state: UserState) => state.userLogout);
-    const setActiveLink = useLinkStore((state) => state.setActiveLink);
     const [expanded, setExpanded] = useState(true);
-    const links = useLinkStore((state) => state.links);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleExpand = () => {
         setExpanded(!expanded);
@@ -62,13 +61,13 @@ export function Sidebar() {
 
             <div className="flex flex-col justify-between flex-1 mt-6">
                 <nav>
-                    <button
+                    <Link
+                        to="/admin"
                         className={`flex items-center px-4 py-2 w-full rounded-md ${
-                            links.dashboard
+                            location.pathname === "/admin"
                                 ? "bg-green-light text-green-dark"
                                 : "bg-light text-gray"
                         }`}
-                        onClick={() => setActiveLink("dashboard")}
                     >
                         {expanded ? (
                             <PresentationChartBarIcon
@@ -86,15 +85,15 @@ export function Sidebar() {
                                 </span>
                             </>
                         )}
-                    </button>
+                    </Link>
 
-                    <button
+                    <Link
+                        to="/admin/products"
                         className={`flex items-center px-4 py-2 w-full rounded-md ${
-                            links.products
+                            location.pathname === "/admin/products"
                                 ? "bg-green-light text-green-dark"
                                 : "bg-light text-gray"
                         } text-gray-700 dark:bg-gray-700 dark:text-gray-200`}
-                        onClick={() => setActiveLink("products")}
                     >
                         {expanded ? (
                             <ShoppingBagIcon
@@ -112,15 +111,15 @@ export function Sidebar() {
                                 </span>
                             </>
                         )}
-                    </button>
+                    </Link>
 
-                    <button
+                    <Link
+                        to="/admin/orders"
                         className={`flex items-center px-4 py-2 w-full rounded-md ${
-                            links.orders
+                            location.pathname === "/admin/orders"
                                 ? "bg-green-light text-green-dark"
                                 : "bg-light text-gray"
                         } text-gray-700 dark:bg-gray-700 dark:text-gray-200`}
-                        onClick={() => setActiveLink("orders")}
                     >
                         {expanded ? (
                             <ShoppingCartIcon
@@ -136,15 +135,15 @@ export function Sidebar() {
                                 <span className="mx-4 font-medium">Orders</span>
                             </>
                         )}
-                    </button>
+                    </Link>
 
-                    <button
+                    <Link
+                        to="/admin/users"
                         className={`flex items-center px-4 py-2 w-full rounded-md ${
-                            links.users
+                            location.pathname === "/admin/users"
                                 ? "bg-green-light text-green-dark"
                                 : "bg-light text-gray"
                         } text-gray-700 dark:bg-gray-700 dark:text-gray-200`}
-                        onClick={() => setActiveLink("users")}
                     >
                         {expanded ? (
                             <UserCircleIcon
@@ -160,7 +159,7 @@ export function Sidebar() {
                                 <span className="mx-4 font-medium">Users</span>
                             </>
                         )}
-                    </button>
+                    </Link>
                 </nav>
 
                 <button

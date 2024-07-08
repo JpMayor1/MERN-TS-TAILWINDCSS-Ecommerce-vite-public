@@ -94,9 +94,9 @@ const AdminUsers = () => {
                                                 {user.isAdmin ? (
                                                     <p>Admin</p>
                                                 ) : (
+                                                   <>
                                                     <p>User</p>
-                                                )}
-                                                <button
+                                                    <button
                                                     className="bg-red-orange text-light px-2 py-1 rounded-md"
                                                     onClick={() =>
                                                         handleDeleteUser(
@@ -105,7 +105,9 @@ const AdminUsers = () => {
                                                     }
                                                 >
                                                     Delete
-                                                </button>
+                                                </button></>
+                                                )}
+                                                
                                             </div>
                                         </li>
                                     ))}

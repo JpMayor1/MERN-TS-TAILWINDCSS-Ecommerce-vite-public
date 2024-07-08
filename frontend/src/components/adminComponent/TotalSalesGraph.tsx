@@ -16,25 +16,24 @@ const TotalSalesGraph = () => {
     };
 
     useEffect(() => {
-        fetchTotalSales();
-    });
+        async function fetchTotalSales() {
+            try {
+                const response = await axios.get(`${API}/api/orders`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-    async function fetchTotalSales() {
-        try {
-            const response = await axios.get(`${API}/api/orders`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            const totalSalesData = response.data.map(
-                (order: Order) => order.total
-            );
-            setTotalSales(totalSalesData);
-        } catch (error) {
-            console.error("Error fetching total sales:", error);
+                const totalSalesData = response.data.map(
+                    (order: Order) => order.total
+                );
+                setTotalSales(totalSalesData);
+            } catch (error) {
+                console.error("Error fetching total sales:", error);
+            }
         }
-    }
+        fetchTotalSales();
+    }, [API, token]);
 
     const data = {
         labels: ["Total Sales"],

@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import AdminHome from "./pages/admin/AdminHome";
 import Home from "./pages/Home";
 import ProductPage from "./pages/user/ProductsPage";
 import AdminRoute from "./routes/AdminRoute";
@@ -13,6 +12,10 @@ import IsAdminRoute from "./routes/IsAdminRoute";
 import IsAuth from "./routes/IsAuth";
 import CheckOutPage from "./pages/user/CheckOutPage";
 import UserOrderInfo from "./components/userComponent/UserOrderInfo";
+import Dashboard from "./components/adminComponent/Dashboard";
+import AdminProducts from "./components/adminComponent/AdminProducts";
+import AdminOrders from "./components/adminComponent/AdminOrders";
+import AdminUsers from "./components/adminComponent/AdminUsers";
 
 const router = createBrowserRouter([
     {
@@ -73,7 +76,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/admin",
-                element: <AdminHome />,
+                element: <Dashboard />,
+            },
+            {
+                path: "/admin/products",
+                element: <AdminProducts />,
+            },
+            {
+                path: "/admin/orders",
+                element: <AdminOrders />,
+            },
+            {
+                path: "/admin/users",
+                element: <AdminUsers />,
             },
         ],
     },

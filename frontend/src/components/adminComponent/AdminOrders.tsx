@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useUserStore } from "../../stores/useUserStore";
 import ClipLoader from "react-spinners/ClipLoader";
-import { OrderInfoType, OrderProductType } from "../../utils/types";
+import { OrderInfoType, ProductCartType } from "../../utils/types";
 import OrderInfo from "./OrderInfo";
 
 const AdminOrders = () => {
@@ -16,7 +16,7 @@ const AdminOrders = () => {
     const [email, setEmail] = useState("");
     const [cpNumber, setCpNumber] = useState("");
     const [address, setAddress] = useState("");
-    const [products, setProducts] = useState<OrderProductType[]>([]);
+    const [products, setProducts] = useState<ProductCartType[]>([]);
     const [total, setTotal] = useState(0);
     const [status, setStatus] = useState("");
     const [paymentMethod, setPaymentMethod] = useState("");
@@ -45,31 +45,19 @@ const AdminOrders = () => {
         getOrders();
     }, [API, token]);
 
-    const handleShowOrderInfo = (
-        id: string,
-        username: string,
-        email: string,
-        cpNumber: string,
-        address: string,
-        products: OrderProductType[],
-        status: string,
-        paymentMethod: string,
-        paid: string,
-        total: number,
-        note: string
-    ) => {
-        setShowOrderInfo(!showOrderInfo);
-        setId(id);
-        setUsername(username);
-        setEmail(email);
-        setCpNumber(cpNumber);
-        setAddress(address);
-        setProducts(products);
-        setTotal(total);
-        setStatus(status);
-        setPaymentMethod(paymentMethod);
-        setPaid(paid);
-        setNote(note);
+    const handleShowOrderInfo = (order: OrderInfoType) => {
+      setShowOrderInfo(!showOrderInfo);
+      setId(order._id);
+      setUsername(order.username);
+      setEmail(order.email);
+      setCpNumber(order.cpNumber);
+      setAddress(order.address);
+      setProducts(order.products);
+      setTotal(order.total);
+      setStatus(order.status);
+      setPaymentMethod(order.paymentMethod);
+      setPaid(order.paid);
+      setNote(order.note);
     };
 
     const toggleShowModal = () => {
@@ -126,19 +114,7 @@ const AdminOrders = () => {
                                             <div className="shrink-0 sm:flex sm:flex-col sm:items-center">
                                                 <button
                                                     onClick={() =>
-                                                        handleShowOrderInfo(
-                                                            order._id,
-                                                            order.username,
-                                                            order.email,
-                                                            order.cpNumber,
-                                                            order.address,
-                                                            order.products,
-                                                            order.status,
-                                                            order.paymentMethod,
-                                                            order.paid,
-                                                            order.total,
-                                                            order.note
-                                                        )
+                                                      handleShowOrderInfo(order)
                                                     }
                                                     className="bg-green-dark text-light py-2 px-4 rounded-lg"
                                                 >

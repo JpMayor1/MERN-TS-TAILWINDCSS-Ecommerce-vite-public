@@ -109,6 +109,21 @@ export type OrderInfoType = {
     paid: string;
     total: number;
     note: string;
-    createdAt? : string;
+    createdAt?: string;
     toggleShowModal: () => void;
+};
+
+export type OrderProductType = {
+    _id: string;
+    userId?: string;
+    username: string;
+    email: string;
+    cpNumber: string;
+    address: string;
+    products: ProductCartType[];
+    status: string;
+    paymentMethod: string;
+    paid: string;
+    total: number;
+    note: string;
 };

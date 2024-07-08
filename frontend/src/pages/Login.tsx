@@ -4,10 +4,12 @@ import { toast, Toaster } from "react-hot-toast";
 import axios from "axios";
 import { useUserStore } from "../stores/useUserStore";
 import { useCheckOutInfoStore } from "../stores/useCheckOutInfo";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const Api = import.meta.env.VITE_REACT_APP_API;
     const addUserInfo = useUserStore((state) => state.addUserInfo);
     const setUser = useCheckOutInfoStore((state) => state.setUser);
@@ -15,6 +17,7 @@ const Login = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsLoading(true);
         await axios
             .post(`${Api}/api/user/login`, {
                 email,
@@ -59,6 +62,9 @@ const Login = () => {
             .catch((err) => {
                 toast.error(err.response.data.message);
                 console.log(err);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     };
 
@@ -131,7 +137,11 @@ const Login = () => {
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                Sign in
+                                {isLoading ? (
+                                    <BeatLoader color="white" size={20} />
+                                ) : (
+                                    "Sign in"
+                                )}
                             </button>
                         </div>
                     </form>
